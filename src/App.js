@@ -1,20 +1,18 @@
 import React from 'react';
-import Signup from './pages/Signup/Signup.page';
+// import Signup from './pages/Signup/Signup.page';
+// import Login from './pages/Login/Login.page';
 import './App.css';
-import Login from './pages/Login/Login.page';
+import Profile from './pages/Profile/Profile.page';
 
 function App() {
+  // const profile = {
+  //   name
+  // }
   return (
     <div className="App">
-      <Signup/>
-      <Login/>
-      <Login/>
-      <Login/>
-      <Login/>
-      <Login/>
-      <Login/>
-      <Login/>
-      <Login/>
+      {/* <Signup/>
+      <Login/> */}
+      <Profile name={"Prayas Gupta"} age={9} />
     </div>
   );
 }
