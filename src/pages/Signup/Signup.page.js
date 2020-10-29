@@ -3,18 +3,31 @@ import "./Signup.css";
 import { Button, TextField } from "@material-ui/core";
 
 function Signup(props) {
+
   return (
     <div className="Signup">
-      <h1 className="page-heading">Signup</h1>
+      <h1 className="page-heading">Sign Up</h1>
+      
       <div className="input">
-        <TextField label="Email" variant="outlined" fullWidth />
+        <TextField required label="Name" variant="outlined" color="secondary" fullWidth />
       </div>
+      
       <div className="input">
-        <TextField label="Password" variant="outlined" fullWidth />
+        <TextField required label="Email" variant="outlined" color="secondary" fullWidth />
       </div>
+      
+      <div className="input">
+        <TextField required label="Password" variant="outlined" color="secondary" type = "password" fullWidth />
+      </div>    
+
       <div className="submit">
-        <Button variant="contained" color="primary">Submit</Button>
+        <Button variant="contained" color="secondary">Sign Up</Button>
       </div>
+
+      <div className="accountExists">
+        <Button color = "secondary">Already have an account? Login.</Button>
+      </div>
+
     </div>
   );
 }

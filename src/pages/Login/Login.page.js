@@ -6,7 +6,7 @@ function Login(props) {
   return (
     <div className="Login">
       <h1 className="page-heading">Login</h1>
-      <div className="input">
+      {/* <div className="input">
         <TextField label="Email" variant="outlined" fullWidth />
       </div>
       <div className="input">
@@ -14,7 +14,9 @@ function Login(props) {
       </div>
       <div className="submit">
         <Button variant="contained" color="primary">Submit</Button>
-      </div>
+      </div> */}
+      <img SRC="/Users/Akash/Desktop/friendeed-app/src/pages/Login/insta.jpg" alt="insta" width="10" height="10"/>
+
     </div>
   );
 }
