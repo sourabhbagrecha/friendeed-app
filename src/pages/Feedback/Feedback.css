@@ -1,0 +1,20 @@
+.button{
+    padding-top: 1rem;
+    /* align-content: center; */
+    text-align: center;
+
+}
+
+.card{
+    text-align: center;
+    padding-top: 6rem;
+    padding-right: 4rem;
+    padding-left: 4rem;
+
+}
+
+.page-heading {
+    margin-top: 0;
+    color:white;
+  }
+  
