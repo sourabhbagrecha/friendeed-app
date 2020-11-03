@@ -4,35 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { Button, TextField } from "@material-ui/core";
 import { Facebook, Instagram, LinkedIn }  from '@material-ui/icons';
 
-
-//import { makeStyles } from '@material-ui/core/styles';
-//import { deepOrange } from '@material-ui/core/colors';
-
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: 'flex',
-//     alignItems: 'right',
-//     justifyContent: 'center',
-//     flexShrink: 0,
-//     width: 40,
-//     height: 40,
-//     '& > *': {
-//       margin: theme.spacing(1)
-//     },
-//   },
-//   orange: {
-//     color: theme.palette.getContrastText(deepOrange[500]),
-//     backgroundColor: deepOrange[500],
-//   },
-// }));
-
-
-
-
 function CreateProfile(props) {
-  // const classes = useStyles();
-
   return(
     <div className="Profile">
       <h1 className="page-heading">Create your profile</h1>
@@ -65,14 +37,6 @@ function CreateProfile(props) {
       <Facebook className="social-icon" color="secondary" style={{fontSize: "80px"}}/>
       <LinkedIn className="social-icon" color="secondary" style={{fontSize: "80px"}}/>
       <Instagram className="social-icon" color="secondary" style={{fontSize: "80px"}}/>
-      
-
-
-
-      
-      
-
-
     </div>
   );
 }

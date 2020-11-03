@@ -1,7 +1,10 @@
 .App {
   width: 100%;
   min-height: 100vh;
+  background-color: rgb(14, 22, 77);
+}
+
+.mobile-device {
   max-width: 600px;
   margin: 0 auto;
-  background-color: rgb(14, 22, 77);
 }
