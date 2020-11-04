@@ -10,14 +10,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleBackdrop() {
+function Loading() {
   const classes = useStyles();
 
   return (
     <div>
       <Backdrop className={classes.backdrop} open={true}>
-        <img src={PacmanLoader} />
+        <img src={PacmanLoader} alt="Loading..." />
       </Backdrop>
     </div>
   );
 }
+
+export default Loading
