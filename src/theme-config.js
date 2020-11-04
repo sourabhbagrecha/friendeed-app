@@ -97,7 +97,6 @@ const themeConfig = {
   },
   button: {
     background: "yellow",
-
   }
 }
 
