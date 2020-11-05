@@ -10,13 +10,12 @@ function Feed({ items }) {
 			<div>
 				{
 					items.map(help =>
-						<Card elevation={5} className="requestCard">
+						<Card elevation={5} className="helpCard">
 							<CardContent>
 								<Link to={`/help/${help.id}`} style={{ textDecoration: "none" }}>
 									<Typography variant="h5" color="primary"><b>{help.title}</b></Typography>
 								</Link>
 								<Typography variant="body1">{help.description}</Typography>
-								<Divider />
 								<Link to={`/user/${help.fromUser.id}`} style={{ textDecoration: "none" }}>
 									<div className="userInfo">
 										<Avatar style={{ height: "1.5rem", width: "1.5rem" }} className="userAvatar" src={help.fromUser.picture} />

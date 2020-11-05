@@ -27,7 +27,7 @@ function Navbar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon onClick={toggleDrawer} />
@@ -40,7 +40,7 @@ function Navbar() {
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={() => history.push("/profile")}
+                onClick={() => history.push("/account")}
                 color="inherit"
               >
                 <Avatar src={user ? user.picture : <Person />} />
