@@ -1,22 +1,30 @@
 import React from 'react';
-//import Signup from './pages/Signup/Signup.page';
-//import Login from './pages/Login/Login.page';
-//import Feed from './pages/Feed/Feed.page';
-//import CreateProfile from './pages/CreateProfile/CreateProfile.page';
-//import Feedback from './pages/Feedback/Feedback.page';
-import AvailableHelpers from './pages/AvailableHelpers/AvailableHelpers.page';
+import NavigationMain from './NavigationMain';
 import './App.css';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import themeConfig from './theme-config';
+import AlertWrapper from './utils/AlertWrapper.component';
+import UserOnboarding from './utils/UserOnboarding.component';
+import Navbar from './components/Navbar/Navbar.component';
+import { DrawerProvider } from './contexts/Drawer.context';
+import MainDrawer from './components/MainDrawer/MainDrawer.component';
 
 function App() {
+  const themeDefinition = createMuiTheme(themeConfig)
   return (
-    <div className="App">
-      {/* <Signup/> */}
-      {/* <Login/> */}
-      {/* <Profile/> */}
-      {/* <Feed/> */}
-      {/* <Feedback/> */}
-      <AvailableHelpers/>
-    </div>
+    <ThemeProvider theme={themeDefinition}>
+        <DrawerProvider>
+          <Navbar/>
+          <MainDrawer/>
+          <div className="App">
+            <div className="mobile-device">
+              <UserOnboarding/>
+              <AlertWrapper/>
+              <NavigationMain />
+            </div>
+          </div>
+        </DrawerProvider>
+    </ThemeProvider>
   );
 }
 

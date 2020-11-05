@@ -1,0 +1,26 @@
+.ShowHelp {
+  padding-top: 3rem;
+}
+
+.page-heading {
+  margin: 0;
+  text-align: center;
+}
+
+.description, .skills-required {
+  color: white;
+}
+
+.description-block, .skills-required-block {
+  margin: 2rem 0;
+}
+
+.author-block {
+  margin: 2rem 0;
+  text-align: right;
+}
+
+.userInfo{
+  flex-direction: row;
+  color: white;
+}

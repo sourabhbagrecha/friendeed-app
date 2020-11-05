@@ -1,18 +1,9 @@
 .Signup {
   text-align: center;
-  padding-top: 0rem;
-  
+  padding-top: 10rem;
 }
 
 .page-heading {
   margin-top: 0;
   color: white; 
-}
-
-.input {
-  margin-top: 0rem;
-}
-
-.accountExists {
-  padding-top: 1rem;
 }

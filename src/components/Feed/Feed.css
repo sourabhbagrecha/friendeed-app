@@ -1,0 +1,33 @@
+.Feed {
+    padding-top: 1rem;
+}
+
+.page-heading {
+    text-align: center;
+    padding-top: 2rem;
+    color: black;
+}
+
+.helpCard {
+    margin: 1rem;
+}
+
+.userInfo {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.userAvatar {
+    margin-right: 0.5rem;
+}
+
+.helpCardButtonBase {
+    flex-direction: column;
+    text-align: left;
+}
+
+.cardTitle {
+    text-align: left;
+}
