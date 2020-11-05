@@ -1,5 +1,5 @@
 .ShowHelp {
-  padding-top: 3rem;
+  
 }
 
 .page-heading {
@@ -7,8 +7,8 @@
   text-align: center;
 }
 
-.description, .skills-required {
-  color: white;
+.help-requests-block {
+  margin-top: 3rem;
 }
 
 .description-block, .skills-required-block {
@@ -22,5 +22,8 @@
 
 .userInfo{
   flex-direction: row;
-  color: white;
+}
+
+.requestCard {
+  margin: 1.5rem 0
 }

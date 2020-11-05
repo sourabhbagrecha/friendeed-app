@@ -44,14 +44,14 @@ const Profile = () => {
           style={{ 'max-width': '100%' }}
         />
         <div>
-          <Typography variant="h5" color="secondary" className={classes.block}>{user.name}</Typography>
+          <Typography variant="h5" color="primary" className={classes.block}>{user.name}</Typography>
         </div>
         <div>
-          <Typography variant="h6" color="secondary" className={classes.block}>{user.email}</Typography>
+          <Typography variant="h6" color="primary" className={classes.block}>{user.email}</Typography>
         </div>
       </div>
       <div className={`${classes.logout} ${classes.block}`}>
-        <Button variant="contained" color="primary" onClick={() => logout({ returnTo: window.location.origin })}>Logout</Button>
+        <Button variant="contained" color="secondary" onClick={() => logout({ returnTo: window.location.origin })}>Logout</Button>
       </div>
     </>
   );
