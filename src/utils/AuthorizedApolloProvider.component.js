@@ -1,22 +1,42 @@
 import React, { useContext } from 'react'
-import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache, split } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { UserContext } from '../contexts/User.context';
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { getMainDefinition } from '@apollo/client/utilities';
 
-const GRAPHQL_ENDPOINT = "https://friendeed.ap-south-1.aws.cloud.dgraph.io/graphql";
+const GRAPHQL_ENDPOINT = "friendeed.ap-south-1.aws.cloud.dgraph.io/graphql";
 
 const AuthorizedApolloProvider = ({ children }) => {
   const { state: { token } } = useContext(UserContext);
   
   const httpLink = createHttpLink({
-    uri: GRAPHQL_ENDPOINT,
+    uri: `https://${GRAPHQL_ENDPOINT}`,
   });
+
+  const wsLink = new WebSocketLink({
+    uri: `wss://${GRAPHQL_ENDPOINT}`,
+    options: {
+      reconnect: true,
+    },
+  });
+
+  const splitLink = split(
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      return (
+        definition.kind === "OperationDefinition" &&
+        definition.operation === "subscription"
+      );
+    },
+    wsLink,
+    httpLink
+  );
 
   const authLink = setContext(async (_, { headers }) => {
     if(!token){
       return headers
     }
-
     return {
       headers: {
         ...headers,
@@ -26,7 +46,7 @@ const AuthorizedApolloProvider = ({ children }) => {
   });
 
   const apolloClient = new ApolloClient({
-    link: authLink.concat(httpLink),
+    link: authLink.concat(splitLink),
     cache: new InMemoryCache(),
   });
 

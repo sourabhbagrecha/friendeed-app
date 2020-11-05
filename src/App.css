@@ -1,7 +1,7 @@
 .App {
   width: 100%;
   min-height: 100vh;
-  background-color: rgb(14, 22, 77);
+  padding-top: 3rem; /* clearance for fixed navbar*/
 }
 
 .mobile-device {

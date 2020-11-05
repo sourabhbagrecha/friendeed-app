@@ -1,16 +1,15 @@
-const themeConfig = {
+const theme = {
   palette: {
-    type: "dark",
     primary: {
-      light: '#fff129',
-      main: '#ffb129',
-      dark: '#ff8d29',
+      light: '#673ab7',
+      main: '#673ab7',
+      dark: '#673ab7',
       contrastText: '#FFFFFF'
     },
     secondary: {
-      light: '#F06191',
-      main: '#E91E63',
-      dark: '#BE134D',
+      light: '#ffca28',
+      main: '#ffc107',
+      dark: '#ffa000',
       contrastText: '#FFFFFF'
     },
     error: {
@@ -38,9 +37,9 @@ const themeConfig = {
       contrastText: 'rgba(0,0,0,87)'
     },
     text: {
-      primary: 'rgba(255, 255, 255, 0.87)',
-      secondary: 'rgba(255, 255, 255, 0.54)',
-      disabled: 'rgba(255, 255, 255, 0.38)'
+      primary: 'rgba(0, 0, 0, 0.87)',
+      secondary: '#ffa000',
+      disabled: 'rgba(0, 0, 0, 0.38)'
     },
     action: {
       hover: 'rgba(0, 0, 0, 0.04)',
@@ -51,10 +50,10 @@ const themeConfig = {
       disabledOpacity: 0.12
     }
   },
-  typography:{
+  typography: {
     h1: {
       fontFamily: 'Roboto',
-      fontWeight: 500,
+      fontWeight: 300,
       fontSize: '96px',
       lineHeight: '112px',
       letterSpacing: '-1.5px',
@@ -100,4 +99,4 @@ const themeConfig = {
   }
 }
 
-export default themeConfig;
+export default theme;

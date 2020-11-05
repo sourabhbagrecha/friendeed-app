@@ -1,5 +1,5 @@
 .Feed {
-    padding-top: 1rem;
+    padding-top: 2rem;
 }
 
 .page-heading {
@@ -9,11 +9,11 @@
 }
 
 .helpCard {
-    margin: 1rem;
+    margin: 1rem 0;
+    padding-bottom: 0;
 }
 
 .userInfo {
-    margin-top: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;

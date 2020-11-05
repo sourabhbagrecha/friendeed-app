@@ -17,7 +17,7 @@ const DrawerProvider = (props) => {
       type: 'LINK',
       text: 'Profile',
       icon: Person,
-      link: "/profile"
+      link: "/account"
     },
     {
       type: 'LINK',

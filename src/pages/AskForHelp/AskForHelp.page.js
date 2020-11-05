@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client'
 import { Button, TextField, Typography } from '@material-ui/core'
+import { formatRFC3339 } from 'date-fns'
 import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { AlertContext } from '../../contexts/Alert.context'
@@ -7,8 +8,8 @@ import { UserContext } from '../../contexts/User.context'
 import './AskForHelp.css'
 
 const ADD_HELP = gql`
-mutation AddHelp($title: String!, $description: String!, $userEmail: String!, $skillsRequired: String) {
-  addHelp(input: [{title: $title, description: $description, skillsRequired: $skillsRequired, fromUser: {email: $userEmail}}]){
+mutation AddHelp($title: String!, $description: String!, $userEmail: String!, $skillsRequired: String, $createdAt: DateTime!) {
+  addHelp(input: [{title: $title, description: $description, skillsRequired: $skillsRequired, fromUser: {email: $userEmail}, createdAt: $createdAt}]){
     help{
       title
       description
@@ -49,7 +50,8 @@ function AskForHelp() {
         title,
         description,
         skillsRequired,
-        userEmail: user.email
+        userEmail: user.email,
+        createdAt: formatRFC3339(Date.now())
       }
     })
   }
