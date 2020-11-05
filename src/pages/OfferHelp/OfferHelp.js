@@ -5,11 +5,12 @@ import { useHistory, useRouteMatch } from 'react-router-dom'
 // import Loading from '../../components/Loading.component'
 import { AlertContext } from '../../contexts/Alert.context'
 import { UserContext } from '../../contexts/User.context'
+import { formatRFC3339 } from 'date-fns'
 import './OfferHelp.css'
 
 const ADD_HELP_REQUEST = gql`
-mutation AddHelpRequest($title: String!, $description: String!, $helpId: ID!, $userEmail: String!) {
-	addHelpRequest(input: [{title: $title, description: $description, help: {id: $helpId}, fromUser: {email: $userEmail}}]){
+mutation AddHelpRequest($title: String!, $description: String!, $helpId: ID!, $userEmail: String!, $createdAt: DateTime!) {
+	addHelpRequest(input: [{title: $title, description: $description, help: {id: $helpId}, fromUser: {email: $userEmail}, createdAt: $createdAt}]){
     helpRequest{
       id
       title
@@ -58,8 +59,8 @@ function OfferHelp() {
   }
 
   const onCompleted = (data) => {
-    setAlert(true, "Help Request sent successfully")
     history.push(`/help/${helpId}`)
+    setAlert(true, "Help Request sent successfully")
   }
 
   const [addHelpRequestSubmit] = useMutation(ADD_HELP_REQUEST, { onError, onCompleted })
@@ -68,7 +69,6 @@ function OfferHelp() {
   // if (error) return <p>{error.message}</p>
 
   // const {getHelp} = data; //We will use it later to populate the offer help page
-
   const onSubmit = (e) => {
     e.preventDefault()
     if (!title || !description || !user) {
@@ -80,7 +80,8 @@ function OfferHelp() {
         title,
         description,
         userEmail: user.email,
-        helpId
+        helpId,
+        createdAt: formatRFC3339(Date.now())
       }
     })
   }

@@ -3,10 +3,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/User.context';
 import Loading from '../components/Loading.component';
+import { formatRFC3339 } from 'date-fns';
 
 const ADD_USER = gql`
-mutation AddUser($email: String!, $name: String, $picture: String) {
-  addUser(input: [{email: $email, name: $name, picture: $picture}]){
+mutation AddUser($email: String!, $name: String, $picture: String, $createdAt: DateTime!) {
+  addUser(input: [{email: $email, name: $name, picture: $picture, createdAt: $createdAt}]){
     user{
       id
       email
@@ -72,7 +73,8 @@ function UserOnboarding() {
         variables: {
           email: user.email,
           name: user.name || user.nickname,
-          picture: user.picture
+          picture: user.picture,
+          createdAt: formatRFC3339(Date.now())
         }
       })
     } // eslint-disable-next-line

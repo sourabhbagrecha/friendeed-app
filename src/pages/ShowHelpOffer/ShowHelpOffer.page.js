@@ -1,9 +1,11 @@
-import React from 'react';
-import { gql, useSubscription } from '@apollo/client'
-import { Avatar, Card, CardContent, Typography } from '@material-ui/core'
+import React, { useContext, useState } from 'react';
+import { gql, useMutation, useSubscription } from '@apollo/client'
+import { Avatar, Button, Card, CardContent, TextField, Typography } from '@material-ui/core'
 import { Link, useRouteMatch } from 'react-router-dom';
 import Loading from '../../components/Loading.component';
 import "./ShowHelpOffer.css";
+import { formatRFC3339 } from 'date-fns';
+import { UserContext } from '../../contexts/User.context';
 
 const GET_HELP = gql`
   subscription GetHelpRequest($id: ID!) {
@@ -29,29 +31,56 @@ const GET_HELP = gql`
   }
 `;
 
+const ADD_MESSAGE = gql`
+mutation AddMessage($text: String!, $userEmail: String!, $createdAt: DateTime!, $helpRequest: ID!){
+  addMessage(input: [{text: $text, fromUser: {email: $userEmail}, helpRequest: {id: $helpRequest}, createdAt: $createdAt}]){
+    message{
+      text
+      id
+    }
+    numUids
+  }
+}
+`;
 
 function ShowHelpOffer() {
-  console.log("Mountin")
   const match = useRouteMatch();
+  const { state: { user } } = useContext(UserContext);
   const { helpOfferId } = match.params;
-
-  const onSubscriptionData = (subsData) => {
-    console.log("This is the subsData", subsData)
-  }
+  const [message, setMessage] = useState("");
 
   const { loading, error, data } = useSubscription(GET_HELP, {
     variables: {
       id: helpOfferId
-    },
-    onSubscriptionData 
+    }
   });
+
+  const onError = (err) => { console.log(err) }
+  const onCompleted = (data) => { console.log(data) }
+
+  const [addMessage] = useMutation(ADD_MESSAGE, { onError, onCompleted })
 
   if (loading) return <Loading />
   if (error) return <p>{error.message}</p>
 
+  const handleSendMessage = () => {
+    if (!message) {
+      return
+    }
+    addMessage({
+      variables: {
+        text: message,
+        userEmail: user.email,
+        createdAt: formatRFC3339(Date.now()),
+        helpRequest: helpOfferId,
+      }
+    })
+  }
+
   if (!data.getHelpRequest) return "Not found"
 
   const { getHelpRequest: { title, description, fromUser, conversation } } = data
+
 
   return (
     <div className="ShowHelpOffer">
@@ -69,8 +98,8 @@ function ShowHelpOffer() {
       <div className="help-requests-block">
         {
           conversation.length > 0 ?
-            <Typography variant="h4" color="primary">Conversation: {conversation.length}</Typography> :
-            <Typography variant="h6" color="error">No messages here, start a conversation now!</Typography>
+            <Typography variant="h5" color="primary">Conversation: {conversation.length}</Typography> :
+            <Typography variant="h6" color="error">No messages, start a conversation now!</Typography>
         }
         {
           conversation.map(message =>
@@ -87,6 +116,8 @@ function ShowHelpOffer() {
             </Card>
           )
         }
+        <TextField label="message" value={message} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth style={{ margin: "2rem 0 0 0" }} />
+        <Button variant="contained" color="secondary" onClick={handleSendMessage}>Send</Button>
       </div>
     </div>
   )

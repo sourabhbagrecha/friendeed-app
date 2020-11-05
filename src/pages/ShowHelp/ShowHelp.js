@@ -1,12 +1,12 @@
 import React from 'react';
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery, useSubscription } from '@apollo/client'
 import { Avatar, Button, Card, CardContent, Divider, makeStyles, Typography } from '@material-ui/core'
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import Loading from '../../components/Loading.component';
 import "./ShowHelp.css";
 
 const GET_HELP = gql`
-  query GetHelp($id: ID!) {
+  subscription GetHelp($id: ID!) {
     getHelp(id: $id) {
       title
       description
@@ -49,7 +49,7 @@ function ShowHelp() {
   const { helpId } = match.params;
   const classes = useStyles();
 
-  const { loading, error, data } = useQuery(GET_HELP, {
+  const { loading, error, data } = useSubscription(GET_HELP, {
     variables: {
       id: helpId
     }
