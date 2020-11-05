@@ -9,6 +9,7 @@ const GET_FEED = gql`
       id
       title
       description
+      createdAt
 			fromUser{
 				id
         name

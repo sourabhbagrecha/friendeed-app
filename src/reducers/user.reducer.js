@@ -4,6 +4,8 @@ const userReducer = (state, action) => {
       return { ...state, token: action.payload }
     case "SET_USER":
       return { ...state, user: action.payload }
+    case "SET_USER_ID":
+      return { ...state, userId: action.payload }
     default:
       return state
   }

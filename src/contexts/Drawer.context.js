@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Home, ExitToApp, Person } from "@material-ui/icons";
+import { Home, ExitToApp, Person, LiveHelp } from "@material-ui/icons";
 import React, { createContext, useState } from "react";
 
 const DrawerContext = createContext();
@@ -11,7 +11,7 @@ const DrawerProvider = (props) => {
       type: 'LINK',
       text: 'Feed',
       icon: Home,
-      link: "/"
+      link: "/home"
     },
     {
       type: 'LINK',
@@ -22,7 +22,7 @@ const DrawerProvider = (props) => {
     {
       type: 'LINK',
       text: 'Ask For Help',
-      icon: Person,
+      icon: LiveHelp,
       link: "/new"
     },
     {

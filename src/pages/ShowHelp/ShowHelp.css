@@ -1,27 +1,14 @@
-.ShowHelp {
-  
-}
-
 .page-heading {
   margin: 0;
   text-align: center;
 }
 
 .help-requests-block {
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 .description-block, .skills-required-block {
-  margin: 2rem 0;
-}
-
-.author-block {
-  margin: 2rem 0;
-  text-align: right;
-}
-
-.userInfo{
-  flex-direction: row;
+  margin: 1rem 0;
 }
 
 .requestCard {
