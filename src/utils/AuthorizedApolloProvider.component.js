@@ -4,8 +4,9 @@ import { setContext } from "@apollo/client/link/context";
 import { UserContext } from '../contexts/User.context';
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from '@apollo/client/utilities';
+import configs from '../configs';
 
-const GRAPHQL_ENDPOINT = "friendeed.ap-south-1.aws.cloud.dgraph.io/graphql";
+const GRAPHQL_ENDPOINT = configs[process.env.NODE_ENV].slashGraphQLEndpoint;
 
 const AuthorizedApolloProvider = ({ children }) => {
   const { state: { token } } = useContext(UserContext);

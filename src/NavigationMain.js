@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute.component'
 import AskForHelp from './pages/AskForHelp/AskForHelp.page'
 import Home from './pages/Home/Home.page'
+import Landing from './pages/Landing/Landing.page'
 import Login from './pages/Login/Login.page'
 import MyAccount from './pages/MyAccount/MyAccount.page'
 import OfferHelp from './pages/OfferHelp/OfferHelp'
@@ -15,9 +16,8 @@ function NavigationMain(props) {
   console.log(process.env.NODE_ENV)
   return (
     <Switch>
+      <Route exact path="/" component={Landing} />
       <PrivateRoute exact path="/home" component={Home} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={Signup} />
       <PrivateRoute exact path="/new" component={AskForHelp} />
       <PrivateRoute exact path="/account" component={MyAccount} />
       <PrivateRoute exact path="/user/:userId" component={Profile} />

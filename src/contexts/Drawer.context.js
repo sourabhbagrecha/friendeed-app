@@ -11,7 +11,7 @@ const DrawerProvider = (props) => {
       type: 'LINK',
       text: 'Feed',
       icon: Home,
-      link: "/"
+      link: "/home"
     },
     {
       type: 'LINK',
