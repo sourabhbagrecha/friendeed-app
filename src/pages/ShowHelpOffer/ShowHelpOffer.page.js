@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { gql, useMutation, useSubscription } from '@apollo/client'
-import { Avatar, Button, Card, CardContent, TextField, Typography } from '@material-ui/core'
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Button, Card, CardContent, TextField, Typography } from '@material-ui/core'
+import { useRouteMatch } from 'react-router-dom';
 import Loading from '../../components/Loading.component';
 import "./ShowHelpOffer.css";
 import { formatRFC3339 } from 'date-fns';
 import { UserContext } from '../../contexts/User.context';
+import UserWithTimeAgo from '../../components/UserWithTimeAgo.component';
 
 const GET_HELP = gql`
   subscription GetHelpRequest($id: ID!) {
@@ -13,6 +14,7 @@ const GET_HELP = gql`
       title
       description
       id
+      createdAt
       fromUser{
         name
         id
@@ -21,6 +23,7 @@ const GET_HELP = gql`
       conversation{
         text
         id
+        createdAt
         fromUser{
           name
           id
@@ -61,7 +64,7 @@ function ShowHelpOffer() {
   const [addMessage] = useMutation(ADD_MESSAGE, { onError, onCompleted })
 
   if (loading) return <Loading />
-  if (error) return <p>{error.message}</p>
+  if (error) return <p>Something went wrong</p>
 
   const handleSendMessage = () => {
     if (!message) {
@@ -75,11 +78,12 @@ function ShowHelpOffer() {
         helpRequest: helpOfferId,
       }
     })
+    setMessage("")
   }
 
   if (!data.getHelpRequest) return "Not found"
 
-  const { getHelpRequest: { title, description, fromUser, conversation } } = data
+  const { getHelpRequest: { title, description, fromUser, conversation, createdAt } } = data
 
 
   return (
@@ -87,14 +91,10 @@ function ShowHelpOffer() {
       <div className="title-block">
         <Typography variant="h4" color="primary" className="page-heading">{title}</Typography>
       </div>
-      <div className="userInfo">
-        <Avatar style={{ height: "1.5rem", width: "1.5rem" }} className="userAvatar" src={fromUser.picture} />
-        <Typography variant="body1">{fromUser.name}</Typography>
-      </div>
+      <UserWithTimeAgo createdAt={createdAt} user={fromUser}/>
       <div className="description-block">
         <Typography className="description" style={{ fontSize: "20px" }}><strong>Description:</strong> {description} </Typography>
       </div>
-      {/* <Button color="primary" variant="contained" onClick={() => history.push(`/help/${helpId}/help-offer`)}>Offer Help</Button> */}
       <div className="help-requests-block">
         {
           conversation.length > 0 ?
@@ -106,18 +106,13 @@ function ShowHelpOffer() {
             <Card elevation={5} className="requestCard">
               <CardContent>
                 <Typography variant="body1">{message.text}</Typography>
-                <Link to={`/user/${message.fromUser.id}`} style={{ textDecoration: "none" }}>
-                  <div className="userInfo">
-                    <Avatar style={{ height: "1.5rem", width: "1.5rem" }} className="userAvatar" src={message.fromUser.picture} />
-                    <Typography variant="body1" color="textSecondary">{message.fromUser.name}</Typography>
-                  </div>
-                </Link>
+                <UserWithTimeAgo createdAt={message.createdAt} user={message.fromUser}/>
               </CardContent>
             </Card>
           )
         }
-        <TextField label="message" value={message} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth style={{ margin: "2rem 0 0 0" }} />
-        <Button variant="contained" color="secondary" onClick={handleSendMessage}>Send</Button>
+        <TextField label="message" value={message} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth />
+        <Button style={{marginTop: "1rem"}} variant="contained" color="secondary" onClick={handleSendMessage}>Send</Button>
       </div>
     </div>
   )
