@@ -12,10 +12,10 @@ import ShowHelpOffer from './pages/ShowHelpOffer/ShowHelpOffer.page'
 import Signup from './pages/Signup/Signup.page'
 
 function NavigationMain(props) {
-  console.log(MyAccount)
+  console.log(process.env.NODE_ENV)
   return (
     <Switch>
-      <PrivateRoute exact path="/" component={Home} />
+      <PrivateRoute exact path="/home" component={Home} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       <PrivateRoute exact path="/new" component={AskForHelp} />
