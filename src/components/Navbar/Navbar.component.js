@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Menu, MenuItem, IconButton, Typography, Toolbar, AppBar, Avatar } from '@material-ui/core'
+import { IconButton, Typography, Toolbar, AppBar, Avatar } from '@material-ui/core'
 import { DrawerContext } from '../../contexts/Drawer.context';
-import { AccountCircle, Person } from '@material-ui/icons';
+import { Person } from '@material-ui/icons';
 import { UserContext } from '../../contexts/User.context';
 import { useHistory } from 'react-router-dom';
 
@@ -21,20 +21,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar() {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
   const { toggleDrawer } = useContext(DrawerContext)
   const { state: { user } } = useContext(UserContext)
   const history = useHistory()
-
-  // const handleMenu = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
 
   return (
     <div className={classes.root}>
@@ -44,9 +33,8 @@ function Navbar() {
             <MenuIcon onClick={toggleDrawer} />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Fr🤝ndeed
+            Fr<span role="img" aria-label="shake-hands">🤝</span>ndeed
           </Typography>
-          {auth && (
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -57,26 +45,7 @@ function Navbar() {
               >
                 <Avatar src={user ? user.picture : <Person />} />
               </IconButton>
-              {/* <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu> */}
             </div>
-          )}
         </Toolbar>
       </AppBar>
     </div>
