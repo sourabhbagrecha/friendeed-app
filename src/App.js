@@ -8,7 +8,7 @@ import UserOnboarding from './utils/UserOnboarding.component';
 import Navbar from './components/Navbar/Navbar.component';
 import { DrawerProvider } from './contexts/Drawer.context';
 import MainDrawer from './components/MainDrawer/MainDrawer.component';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Landing from './pages/Landing/Landing.page';
 
 function App() {

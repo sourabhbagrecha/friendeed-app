@@ -9,9 +9,14 @@ const setUser = (dispatch) => (payload) => {
   dispatch({ type: "SET_USER", payload })
 }
 
-const defaultValue = {
-  token: null,
-  user: null
+const setUserId = (dispatch) => (payload) => {
+  dispatch({ type: "SET_USER_ID", payload })
 }
 
-export const { Context: UserContext, Provider: UserProvider } = contextFactory(userReducer, { setToken, setUser }, defaultValue)
+const defaultValue = {
+  token: null,
+  user: null,
+  userId: null
+}
+
+export const { Context: UserContext, Provider: UserProvider } = contextFactory(userReducer, { setToken, setUser, setUserId }, defaultValue)

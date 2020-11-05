@@ -4,13 +4,11 @@ import PrivateRoute from './components/PrivateRoute.component'
 import AskForHelp from './pages/AskForHelp/AskForHelp.page'
 import Home from './pages/Home/Home.page'
 import Landing from './pages/Landing/Landing.page'
-import Login from './pages/Login/Login.page'
 import MyAccount from './pages/MyAccount/MyAccount.page'
 import OfferHelp from './pages/OfferHelp/OfferHelp'
 import Profile from './pages/Profile/Profile.page'
 import ShowHelp from './pages/ShowHelp/ShowHelp'
 import ShowHelpOffer from './pages/ShowHelpOffer/ShowHelpOffer.page'
-import Signup from './pages/Signup/Signup.page'
 
 function NavigationMain(props) {
   console.log(process.env.NODE_ENV)

@@ -13,21 +13,6 @@
     padding-bottom: 0;
 }
 
-.userInfo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.userAvatar {
-    margin-right: 0.5rem;
-}
-
-.helpCardButtonBase {
-    flex-direction: column;
-    text-align: left;
-}
-
 .cardTitle {
     text-align: left;
 }
