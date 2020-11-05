@@ -99,7 +99,7 @@ function ShowHelpOffer() {
         {
           conversation.length > 0 ?
             <Typography variant="h5" color="primary">Conversation: {conversation.length}</Typography> :
-            <Typography variant="h6" color="error">No messages, start a conversation now!</Typography>
+            <Typography variant="h6" color="error" style={{marginBottom: "1rem"}}>No messages, start a conversation now!</Typography>
         }
         {
           conversation.map(message =>
