@@ -1,9 +1,12 @@
 import React from "react";
 import { Auth0Provider } from "@auth0/auth0-react";
+import auth0Configs from "./auth0.configs";
     
 const Auth0ProviderMain = ({ children }) => {
-  const domain="friendeed-dev.us.auth0.com"
-  const clientId="a6OMEu3KekYtabKIJUDti2hrGxzYsLEg"
+  const env = process.env.NODE_ENV
+  const domain= auth0Configs[env].domain
+  const clientId= auth0Configs[env].clientId
+  console.log({domain, clientId})
   return (
     <Auth0Provider
       domain={domain}
