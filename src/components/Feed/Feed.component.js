@@ -1,23 +1,9 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
-import { Divider, Avatar, Typography, Card, CardContent, ButtonBase, makeStyles } from '@material-ui/core'
+import { Link } from "react-router-dom";
+import { Divider, Avatar, Typography, Card, CardContent } from '@material-ui/core'
 import "./Feed.css";
 
-
-const useStyles = makeStyles({
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "left",
-    textAlign: "left"
-  },
-  cardText: {
-    textAlign: "left"
-  }
-})
-
 function Feed({ items }) {
-  const classes = useStyles();
 
 	return (
 		<>

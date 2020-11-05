@@ -1,6 +1,6 @@
 import React from 'react';
-import { gql, useQuery, useSubscription } from '@apollo/client'
-import { Avatar, Card, CardContent, Divider, makeStyles, Typography } from '@material-ui/core'
+import { gql, useSubscription } from '@apollo/client'
+import { Avatar, Card, CardContent, Typography } from '@material-ui/core'
 import { Link, useRouteMatch } from 'react-router-dom';
 import Loading from '../../components/Loading.component';
 import "./ShowHelpOffer.css";
@@ -29,23 +29,11 @@ const GET_HELP = gql`
   }
 `;
 
-const useStyles = makeStyles({
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "left",
-    textAlign: "left"
-  },
-  cardText: {
-    textAlign: "left"
-  }
-})
-
 
 function ShowHelpOffer() {
   console.log("Mountin")
   const match = useRouteMatch();
-  const { helpOfferId, helpId } = match.params;
+  const { helpOfferId } = match.params;
 
   const onSubscriptionData = (subsData) => {
     console.log("This is the subsData", subsData)
