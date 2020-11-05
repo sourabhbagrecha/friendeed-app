@@ -1,6 +1,6 @@
 import React from 'react'
-import Loading from '../../components/Loading.component'
 import { gql, useQuery } from '@apollo/client'
+import Loading from '../../components/Loading.component'
 import Feed from '../../components/Feed/Feed.component'
 
 const GET_FEED = gql`

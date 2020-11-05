@@ -1,5 +1,5 @@
 import React from 'react';
-import { gql, useQuery, useSubscription } from '@apollo/client'
+import { gql, useSubscription } from '@apollo/client'
 import { Avatar, Button, Card, CardContent, Divider, makeStyles, Typography } from '@material-ui/core'
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import Loading from '../../components/Loading.component';
@@ -65,7 +65,7 @@ function ShowHelp() {
   return (
     <div className="ShowHelp">
       <div className="title-block">
-        <Typography variant="h3" color="primary" className="page-heading">{title}</Typography>
+        <Typography variant="h4" color="primary" className="page-heading">{title}</Typography>
       </div>
       <div className="userInfo">
         <Avatar style={{ height: "1.5rem", width: "1.5rem" }} className="userAvatar" src={fromUser.picture} />

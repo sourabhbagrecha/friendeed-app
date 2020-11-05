@@ -34,7 +34,7 @@ function AskForHelp() {
 
   const onCompleted = (data) => {
     setAlert(true, "Help posted successfully!", "success")
-    history.push("/")
+    history.push(`/help/${data.addHelp.help[0].id}`)
   }
 
   const [addHelpSubmit] = useMutation(ADD_HELP, { onError, onCompleted })

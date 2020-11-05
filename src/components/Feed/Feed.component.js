@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Divider, Avatar, Typography, Card, CardContent } from '@material-ui/core'
+import { Avatar, Typography, Card, CardContent } from '@material-ui/core'
 import "./Feed.css";
 
 function Feed({ items }) {
 
 	return (
 		<>
-			<div>
+			<div className="Feed">
+				<Typography variant="h4" color="primary">Recent Helps Requested</Typography>
 				{
 					items.map(help =>
 						<Card elevation={5} className="helpCard">
