@@ -1,8 +1,8 @@
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 import { Button, TextField, Typography } from '@material-ui/core'
 import React, { useContext, useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
-import Loading from '../../components/Loading.component'
+// import Loading from '../../components/Loading.component'
 import { AlertContext } from '../../contexts/Alert.context'
 import { UserContext } from '../../contexts/User.context'
 import './OfferHelp.css'
@@ -25,18 +25,18 @@ mutation AddHelpRequest($title: String!, $description: String!, $helpId: ID!, $u
 }
 `;
 
-const GET_HELP = gql`
-  query GetHelp($id: ID!) {
-    getHelp(id: $id) {
-      title
-      skillsRequired
-      fromUser{
-        email
-        id
-      }
-    }
-  }
-`;
+// const GET_HELP = gql`
+//   query GetHelp($id: ID!) {
+//     getHelp(id: $id) {
+//       title
+//       skillsRequired
+//       fromUser{
+//         email
+//         id
+//       }
+//     }
+//   }
+// `;
 
 function OfferHelp() {
   const { state: { user } } = useContext(UserContext);
@@ -47,11 +47,11 @@ function OfferHelp() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   
-  const {loading, error, data} = useQuery(GET_HELP, {
-    variables: {
-      id: helpId
-    }
-  })
+  // const {loading, error, data} = useQuery(GET_HELP, {
+  //   variables: {
+  //     id: helpId
+  //   }
+  // })
 
   const onError = (error) => {
     console.log({ error })
@@ -60,15 +60,14 @@ function OfferHelp() {
   const onCompleted = (data) => {
     setAlert(true, "Help Request sent successfully")
     history.push(`/help/${helpId}`)
-
   }
 
   const [addHelpRequestSubmit] = useMutation(ADD_HELP_REQUEST, { onError, onCompleted })
 
-  if (loading) return <Loading/>
-  if (error) return <p>{error.message}</p>
+  // if (loading) return <Loading/>
+  // if (error) return <p>{error.message}</p>
 
-  const {getHelp} = data; //We will use it later to populate the offer help page
+  // const {getHelp} = data; //We will use it later to populate the offer help page
 
   const onSubmit = (e) => {
     e.preventDefault()

@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import { Avatar, Button, Typography } from '@material-ui/core'
 import React from 'react'
-import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import Loading from '../../components/Loading.component';
 import "./ShowHelp.css"
 
@@ -35,7 +35,7 @@ function ShowHelp() {
   if(loading) return <Loading/>
   if(error) return <p>{error.message}</p>
 
-  const {getHelp: {title, description, id, skillsRequired, fromUser}} = data
+  const {getHelp: {title, description, skillsRequired, fromUser}} = data
 
   return (
     <div className="ShowHelp">

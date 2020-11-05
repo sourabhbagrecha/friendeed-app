@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { UserContext } from '../../contexts/User.context';
@@ -27,9 +26,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = () => {
-  const history = useHistory();
   const classes = useStyles();
-  const { state: { user }, setToken, setUser } = useContext(UserContext);
+  const { state: { user } } = useContext(UserContext);
   const { logout } = useAuth0();
 
   if (!user) {

@@ -53,7 +53,7 @@ function UserOnboarding() {
         setToken(idTokenClaims.__raw)
         setUser(idTokenClaims)
       }
-    })();
+    })();// eslint-disable-next-line
   }, [isAuthenticated, getIdTokenClaims]);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ function UserOnboarding() {
           email: user.email
         }
       })
-    }
+    } // eslint-disable-next-line
   }, [user, isAuthenticated])
 
   useEffect(() => {
@@ -75,7 +75,7 @@ function UserOnboarding() {
           picture: user.picture
         }
       })
-    }
+    } // eslint-disable-next-line
   }, [isNewUser])
 
   if (isLoading) {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { UserContext } from '../contexts/User.context';
@@ -6,15 +6,11 @@ import { UserContext } from '../contexts/User.context';
 const GRAPHQL_ENDPOINT = "https://friendeed.ap-south-1.aws.cloud.dgraph.io/graphql";
 
 const AuthorizedApolloProvider = ({ children }) => {
-  const { state: {token, user} } = useContext(UserContext);
+  const { state: { token } } = useContext(UserContext);
   
   const httpLink = createHttpLink({
     uri: GRAPHQL_ENDPOINT,
   });
-
-  useEffect(() => {
-    console.log(token, user)
-  }, [token])
 
   const authLink = setContext(async (_, { headers }) => {
     if(!token){

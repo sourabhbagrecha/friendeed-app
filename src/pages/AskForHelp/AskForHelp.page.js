@@ -43,7 +43,6 @@ function AskForHelp() {
     if (!title || !description || !user) {
       return
     }
-    console.log("passing")
 
     addHelpSubmit({
       variables: {

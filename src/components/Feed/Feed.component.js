@@ -1,8 +1,7 @@
 import React from "react";
-import "./Feed.css";
-import { Divider, Avatar, Typography, Card, CardContent, ButtonBase } from '@material-ui/core'
-import TouchRipple from "@material-ui/core/ButtonBase/TouchRipple";
 import { useHistory } from "react-router-dom";
+import { Divider, Avatar, Typography, Card, CardContent, ButtonBase } from '@material-ui/core'
+import "./Feed.css";
 
 
 function Feed({ items }) {
