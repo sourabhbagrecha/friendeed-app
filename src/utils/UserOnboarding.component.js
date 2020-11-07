@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/User.context';
 import Loading from '../components/Loading.component';
 import { formatRFC3339 } from 'date-fns';
+import { AlertContext } from '../contexts/Alert.context';
 
 const ADD_USER = gql`
 mutation AddUser($email: String!, $name: String, $picture: String, $createdAt: DateTime!) {
@@ -28,13 +29,10 @@ function UserOnboarding() {
   const { state: { user }, setToken, setUser } = useContext(UserContext);
   const { isLoading, isAuthenticated, getIdTokenClaims } = useAuth0();
   const [isNewUser, setIsNewUser] = useState(false)
+  const { setAlert } = useContext(AlertContext)
 
   const onError = (error) => {
-    console.log({ error })
-  }
-
-  const onCompleted = (data) => {
-    console.log({ data })
+    setAlert(true, "Something went wrong!", "error")
   }
 
   const onUserFetchCompleted = (data) => {
@@ -43,14 +41,13 @@ function UserOnboarding() {
     }
   }
 
-  const [addUserSubmit] = useMutation(ADD_USER, { onError, onCompleted })
+  const [addUserSubmit] = useMutation(ADD_USER, { onError })
   const [getUserLazily] = useLazyQuery(GET_USER, {onCompleted: onUserFetchCompleted, onError})
 
   useEffect(() => {
     (async () => {
       if (isAuthenticated) {
         const idTokenClaims = await getIdTokenClaims();
-        console.log(idTokenClaims)
         setToken(idTokenClaims.__raw)
         setUser(idTokenClaims)
       }
