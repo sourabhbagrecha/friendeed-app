@@ -11,13 +11,13 @@ function Feed({ items }) {
 			<div className="Feed">
 				<Typography variant="h5" color="primary">Recent Helps Requested</Typography>
 				{
-					items.map(help =>
-						<Paper elevation={5} className="helpCard">
-							<Link to={`/help/${help.id}`} style={{ textDecoration: "none" }}>
-								<Typography variant="h6" color="primary"><b>{help.title}</b></Typography>
+					items.map(helpRequest =>
+						<Paper elevation={2} className="helpCard">
+							<Link to={`/help/${helpRequest.id}`} style={{ textDecoration: "none" }}>
+								<Typography variant="h6" color="primary"><b>{helpRequest.title}</b></Typography>
 							</Link>
-							<Typography variant="body1">{help.description}</Typography>
-							<UserWithTimeAgo user={help.fromUser} createdAt={help.createdAt} />
+							<Typography variant="body1">{helpRequest.description}</Typography>
+							<UserWithTimeAgo user={helpRequest.fromUser} createdAt={helpRequest.createdAt} />
 						</Paper>
 					)
 				}

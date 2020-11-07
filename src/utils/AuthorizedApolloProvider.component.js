@@ -4,9 +4,9 @@ import { setContext } from "@apollo/client/link/context";
 import { UserContext } from '../contexts/User.context';
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from '@apollo/client/utilities';
-import configs from '../configs';
+import envConfigs from '../configs';
 
-const GRAPHQL_ENDPOINT = configs[process.env.NODE_ENV].slashGraphQLEndpoint;
+const GRAPHQL_ENDPOINT = envConfigs.slashGraphQLEndpoint;
 
 const AuthorizedApolloProvider = ({ children }) => {
   const { state: { token } } = useContext(UserContext);

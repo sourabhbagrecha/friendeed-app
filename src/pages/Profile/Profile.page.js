@@ -1,9 +1,10 @@
 import React from 'react';
-import { Card, CardContent, Divider, Typography } from '@material-ui/core';
+import { Divider, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Loading from '../../components/Loading.component';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
+import { formatDistanceToNow } from 'date-fns';
 
 const useStyles = makeStyles((theme) => ({
   profile: {
@@ -26,26 +27,28 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     textAlign: "left",
-    margin: "1rem 0"
+    margin: "1rem 0",
+    padding: "1rem"
   }
 }));
 
 const GET_USER = gql`
-  query GetUser($id: ID!){
+  query GetUserProfile($id: ID!){
     getUser(id: $id){
       name
       picture
-      helps {
+      helpRequests {
         id
         title
         description
+        createdAt
       }
-      helpRequests {
+      helpOffers {
         title
         id
         description
         createdAt
-        help {
+        helpRequest {
           id
         }
       }
@@ -67,8 +70,6 @@ const Profile = () => {
   if (loading) return <Loading />
   if (error) return <p>Not Found!</p>
 
-  console.log(data)
-
   return (
     <>
       <div className={classes.profile}>
@@ -83,19 +84,18 @@ const Profile = () => {
         <Divider />
         <div>
           {
-            data.getUser.helpRequests.length > 0 ?
+            data.getUser.helpOffers.length > 0 ?
               <>
                 <Typography variant="h5" color="primary" >Recent helps offered: </Typography>
                 {
-                  data.getUser.helpRequests.map(helpRequest =>
-                    <Card className={classes.card} elevation={5} >
-                      <CardContent style={{ paddingBottom: "1rem" }}>
-                        <Link to={`/help/${helpRequest.help.id}/help-offer/${helpRequest.id}`} style={{ textDecoration: "none" }}>
-                          <Typography variant="h6" color="primary"><b>{helpRequest.title}</b></Typography>
-                        </Link>
-                        <Typography variant="body1" style={{ marginTop: "1rem" }}>{helpRequest.description}</Typography>
-                      </CardContent>
-                    </Card>
+                  data.getUser.helpOffers.map(helpOffer =>
+                    <Paper className={classes.card} elevation={2} >
+                      <Link to={`/help/${helpOffer.helpRequest.id}/help-offer/${helpOffer.id}`} style={{ textDecoration: "none" }}>
+                        <Typography variant="h6" color="primary">{helpOffer.title}</Typography>
+                      </Link>
+                      <Typography variant="body1">{helpOffer.description}</Typography>
+                      <Typography variant="caption">{formatDistanceToNow(Date.parse(helpOffer.createdAt))} ago</Typography>
+                    </Paper>
                   )
                 }
               </>
@@ -105,19 +105,18 @@ const Profile = () => {
         </div>
         <div>
           {
-            data.getUser.helps.length > 0 ?
+            data.getUser.helpRequests.length > 0 ?
               <>
-                <Typography variant="h5" color="primary" >Recent helps asked: </Typography>
+                <Typography variant="h5" color="primary" >Recent helps requested: </Typography>
                 {
-                  data.getUser.helps.map(help =>
-                    <Card className={classes.card} elevation={5} >
-                      <CardContent style={{ paddingBottom: "1rem" }}>
-                        <Link to={`/help/${help.id}`} style={{ textDecoration: "none" }}>
-                          <Typography variant="h6" color="primary"><b>{help.title}</b></Typography>
-                        </Link>
-                        <Typography variant="body1" style={{ marginTop: "1rem" }}>{help.description}</Typography>
-                      </CardContent>
-                    </Card>
+                  data.getUser.helpRequests.map(helpRequest =>
+                    <Paper className={classes.card} elevation={2} >
+                      <Link to={`/help/${helpRequest.id}`} style={{ textDecoration: "none" }}>
+                        <Typography variant="h6" color="primary"><b>{helpRequest.title}</b></Typography>
+                      </Link>
+                      <Typography variant="body1">{helpRequest.description}</Typography>
+                      <Typography variant="caption">{formatDistanceToNow(Date.parse(helpRequest.createdAt))} ago</Typography>
+                    </Paper>
                   )
                 }
               </>

@@ -11,7 +11,6 @@ import ShowHelp from './pages/ShowHelp/ShowHelp'
 import ShowHelpOffer from './pages/ShowHelpOffer/ShowHelpOffer.page'
 
 function NavigationMain(props) {
-  console.log(process.env.NODE_ENV)
   return (
     <Switch>
       <Route exact path="/" component={Landing} />
@@ -19,9 +18,9 @@ function NavigationMain(props) {
       <PrivateRoute exact path="/new" component={AskForHelp} />
       <PrivateRoute exact path="/account" component={MyAccount} />
       <PrivateRoute exact path="/user/:userId" component={Profile} />
-      <PrivateRoute exact path="/help/:helpId" component={ShowHelp} />
-      <PrivateRoute exact path="/help/:helpId/offer-help" component={OfferHelp} />
-      <PrivateRoute exact path="/help/:helpId/help-offer/:helpOfferId" component={ShowHelpOffer} />
+      <PrivateRoute exact path="/help/:helpRequestId" component={ShowHelp} />
+      <PrivateRoute exact path="/help/:helpRequestId/offer-help" component={OfferHelp} />
+      <PrivateRoute exact path="/help/:helpRequestId/help-offer/:helpOfferId" component={ShowHelpOffer} />
     </Switch>
   )
 }

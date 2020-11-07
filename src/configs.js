@@ -11,4 +11,6 @@ const configs = {
   }
 }
 
-export default configs
+const envConfigs = configs[process.env.NODE_ENV || "development"]
+
+export default envConfigs

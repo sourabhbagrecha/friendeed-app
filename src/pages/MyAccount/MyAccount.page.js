@@ -30,8 +30,6 @@ function MyAccount() {
   const { state: { user } } = useContext(UserContext);
   const { logout } = useAuth0();
 
-  console.log("myaccount mounting")
-
   if (!user) {
     return <Loading />
   }
