@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { gql, useMutation, useSubscription } from '@apollo/client'
-import { Button, Card, CardContent, Paper, TextField, Typography } from '@material-ui/core'
+import { Button, Paper, TextField, Typography } from '@material-ui/core'
 import { useRouteMatch } from 'react-router-dom';
 import Loading from '../../components/Loading.component';
 import "./ShowHelpOffer.css";
