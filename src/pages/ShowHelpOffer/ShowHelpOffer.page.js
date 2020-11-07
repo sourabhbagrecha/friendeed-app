@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { gql, useMutation, useSubscription } from '@apollo/client'
-import { Button, Card, CardContent, TextField, Typography } from '@material-ui/core'
+import { Button, Card, CardContent, Paper, TextField, Typography } from '@material-ui/core'
 import { useRouteMatch } from 'react-router-dom';
 import Loading from '../../components/Loading.component';
 import "./ShowHelpOffer.css";
@@ -103,12 +103,10 @@ function ShowHelpOffer() {
         }
         {
           conversation.map(message =>
-            <Card elevation={5} className="requestCard">
-              <CardContent>
-                <Typography variant="body1">{message.text}</Typography>
-                <UserWithTimeAgo createdAt={message.createdAt} user={message.fromUser}/>
-              </CardContent>
-            </Card>
+            <Paper elevation={5} className="requestCard">
+              <Typography variant="body1">{message.text}</Typography>
+              <UserWithTimeAgo createdAt={message.createdAt} user={message.fromUser}/>
+            </Paper>
           )
         }
         <TextField label="message" value={message} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth />

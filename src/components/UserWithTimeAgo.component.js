@@ -1,9 +1,9 @@
-import { Avatar, makeStyles, Typography } from '@material-ui/core'
+import { Avatar, makeStyles } from '@material-ui/core'
 import { formatDistanceToNow } from 'date-fns'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   userInfo: {
     display: "flex",
     flexDirection: "row",
@@ -14,18 +14,28 @@ const useStyles = makeStyles({
   },
   userText: {
     marginLeft: "1rem"
+  },
+  userName: {
+    margin: "0 auto",
+    fontSize: "0.9rem",
+    color: theme.palette.secondary.main
+  },
+  timeDistance: {
+    margin: "0 auto",
+    fontSize: "0.9rem",
+    color: theme.palette.text.disabled
   }
-})
+}))
 
-function UserWithTimeAgo({user, createdAt, style}) {
+function UserWithTimeAgo({ user, createdAt, style }) {
   const classes = useStyles();
   return (
     <Link to={`/user/${user.id}`} style={{ textDecoration: "none" }}>
       <div className={classes.userInfo} style={style}>
-        <Avatar style={{ height: "2.5rem", width: "2.5rem" }} className={classes.userInfo} src={user.picture} />
+        <Avatar style={{ height: "2rem", width: "2rem" }} className={classes.userInfo} src={user.picture} />
         <div className={classes.userText}>
-          <Typography variant="body1" color="textSecondary">{user.name}</Typography>
-          <Typography color="textSecondary">{formatDistanceToNow(Date.parse(createdAt))} ago</Typography>
+          <p className={classes.userName}>{user.name}</p>
+          <p className={classes.timeDistance}>{formatDistanceToNow(Date.parse(createdAt))} ago</p>
         </div>
       </div>
     </Link>
