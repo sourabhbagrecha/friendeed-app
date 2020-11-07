@@ -7,10 +7,10 @@ import { AlertContext } from '../../contexts/Alert.context'
 import { UserContext } from '../../contexts/User.context'
 import './AskForHelp.css'
 
-const ADD_HELP = gql`
-mutation AddHelp($title: String!, $description: String!, $userEmail: String!, $skillsRequired: String, $createdAt: DateTime!) {
-  addHelp(input: [{title: $title, description: $description, skillsRequired: $skillsRequired, fromUser: {email: $userEmail}, createdAt: $createdAt}]){
-    help{
+const ADD_HELP_REQUEST = gql`
+mutation AddHelpRequest($title: String!, $description: String!, $userEmail: String!, $skillsRequired: String, $createdAt: DateTime!) {
+  addHelpRequest(input: [{title: $title, description: $description, skillsRequired: $skillsRequired, fromUser: {email: $userEmail}, createdAt: $createdAt}]){
+    helpRequest{
       title
       description
       id
@@ -29,15 +29,15 @@ function AskForHelp() {
   const [skillsRequired, setSkillsRequired] = useState("")
 
   const onError = (error) => {
-    console.log({ error })
+    setAlert(true, "Something went wrong!", "error")
   }
 
   const onCompleted = (data) => {
     setAlert(true, "Help posted successfully!", "success")
-    history.push(`/help/${data.addHelp.help[0].id}`)
+    history.push(`/help/${data.addHelpRequest.helpRequest[0].id}`)
   }
 
-  const [addHelpSubmit] = useMutation(ADD_HELP, { onError, onCompleted })
+  const [addHelpRequestSubmit] = useMutation(ADD_HELP_REQUEST, { onError, onCompleted })
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -45,7 +45,7 @@ function AskForHelp() {
       return
     }
 
-    addHelpSubmit({
+    addHelpRequestSubmit({
       variables: {
         title,
         description,

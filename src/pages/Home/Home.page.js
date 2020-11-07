@@ -5,7 +5,7 @@ import Feed from '../../components/Feed/Feed.component'
 
 const GET_FEED = gql`
 	query getFeed{
-		queryHelp{
+		queryHelpRequest{
       id
       title
       description
@@ -27,7 +27,7 @@ function Home() {
   return (
     <>
       <div className="Home">
-        <Feed items={data.queryHelp} />
+        <Feed items={data.queryHelpRequest} />
       </div>
     </>
   )

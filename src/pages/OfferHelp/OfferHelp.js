@@ -8,17 +8,17 @@ import { UserContext } from '../../contexts/User.context'
 import { formatRFC3339 } from 'date-fns'
 import './OfferHelp.css'
 
-const ADD_HELP_REQUEST = gql`
-mutation AddHelpRequest($title: String!, $description: String!, $helpId: ID!, $userEmail: String!, $createdAt: DateTime!) {
-	addHelpRequest(input: [{title: $title, description: $description, help: {id: $helpId}, fromUser: {email: $userEmail}, createdAt: $createdAt}]){
-    helpRequest{
+const ADD_HELP_Offer = gql`
+mutation AddHelpOffer($title: String!, $description: String!, $helpRequestId: ID!, $userEmail: String!, $createdAt: DateTime!) {
+	addHelpOffer(input: [{title: $title, description: $description, helpRequest: {id: $helpRequestId}, fromUser: {email: $userEmail}, createdAt: $createdAt}]){
+    helpOffer{
       id
       title
       description
       fromUser{
         id
       }
-      help{
+      helpRequest{
         id
       }
     }
@@ -26,61 +26,38 @@ mutation AddHelpRequest($title: String!, $description: String!, $helpId: ID!, $u
 }
 `;
 
-// const GET_HELP = gql`
-//   query GetHelp($id: ID!) {
-//     getHelp(id: $id) {
-//       title
-//       skillsRequired
-//       fromUser{
-//         email
-//         id
-//       }
-//     }
-//   }
-// `;
-
 function OfferHelp() {
   const { state: { user } } = useContext(UserContext);
   const { setAlert } = useContext(AlertContext)
   const match = useRouteMatch();
   const history = useHistory();
-  const {helpId} = match.params;
+  const {helpRequestId} = match.params;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  
-  // const {loading, error, data} = useQuery(GET_HELP, {
-  //   variables: {
-  //     id: helpId
-  //   }
-  // })
 
   const onError = (error) => {
     setAlert(true, "Something went wrong", "error")
   }
 
   const onCompleted = (data) => {
-    history.push(`/help/${helpId}/help-offer/${data.addHelpRequest.helpRequest[0].id}`)
-    setAlert(true, "Help Request sent successfully", "success")
+    history.push(`/help/${helpRequestId}/help-offer/${data.addHelpOffer.helpOffer[0].id}`)
+    setAlert(true, "Help Offer sent successfully", "success")
   }
 
-  const [addHelpRequestSubmit] = useMutation(ADD_HELP_REQUEST, { onError, onCompleted })
+  const [addHelpOfferSubmit] = useMutation(ADD_HELP_Offer, { onError, onCompleted })
 
-  // if (loading) return <Loading/>
-  // if (error) return <p>{error.message}</p>
-
-  // const {getHelp} = data; //We will use it later to populate the offer help page
   const onSubmit = (e) => {
     e.preventDefault()
     if (!title || !description || !user) {
       return
     }
 
-    addHelpRequestSubmit({
+    addHelpOfferSubmit({
       variables: {
         title,
         description,
         userEmail: user.email,
-        helpId,
+        helpRequestId,
         createdAt: formatRFC3339(Date.now())
       }
     })

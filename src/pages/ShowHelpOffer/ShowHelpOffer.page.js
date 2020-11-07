@@ -7,10 +7,11 @@ import "./ShowHelpOffer.css";
 import { formatRFC3339 } from 'date-fns';
 import { UserContext } from '../../contexts/User.context';
 import UserWithTimeAgo from '../../components/UserWithTimeAgo.component';
+import { AlertContext } from '../../contexts/Alert.context';
 
 const GET_HELP = gql`
-  subscription GetHelpRequest($id: ID!) {
-    getHelpRequest(id: $id) {
+  subscription GetHelpOffer($id: ID!) {
+    getHelpOffer(id: $id) {
       title
       description
       id
@@ -35,8 +36,8 @@ const GET_HELP = gql`
 `;
 
 const ADD_MESSAGE = gql`
-mutation AddMessage($text: String!, $userEmail: String!, $createdAt: DateTime!, $helpRequest: ID!){
-  addMessage(input: [{text: $text, fromUser: {email: $userEmail}, helpRequest: {id: $helpRequest}, createdAt: $createdAt}]){
+mutation AddMessage($text: String!, $userEmail: String!, $createdAt: DateTime!, $helpOffer: ID!){
+  addMessage(input: [{text: $text, fromUser: {email: $userEmail}, helpOffer: {id: $helpOffer}, createdAt: $createdAt}]){
     message{
       text
       id
@@ -49,6 +50,7 @@ mutation AddMessage($text: String!, $userEmail: String!, $createdAt: DateTime!, 
 function ShowHelpOffer() {
   const match = useRouteMatch();
   const { state: { user } } = useContext(UserContext);
+  const { setAlert } = useContext(AlertContext);
   const { helpOfferId } = match.params;
   const [message, setMessage] = useState("");
 
@@ -58,10 +60,9 @@ function ShowHelpOffer() {
     }
   });
 
-  const onError = (err) => { console.log(err) }
-  const onCompleted = (data) => { console.log(data) }
+  const onError = (err) => { setAlert(true, "Something went wrong!", "error") }
 
-  const [addMessage] = useMutation(ADD_MESSAGE, { onError, onCompleted })
+  const [addMessage] = useMutation(ADD_MESSAGE, { onError })
 
   if (loading) return <Loading />
   if (error) return <p>Something went wrong</p>
@@ -75,15 +76,15 @@ function ShowHelpOffer() {
         text: message,
         userEmail: user.email,
         createdAt: formatRFC3339(Date.now()),
-        helpRequest: helpOfferId,
+        helpOffer: helpOfferId,
       }
     })
     setMessage("")
   }
 
-  if (!data.getHelpRequest) return "Not found"
+  if (!data.getHelpOffer) return "Not found"
 
-  const { getHelpRequest: { title, description, fromUser, conversation, createdAt } } = data
+  const { getHelpOffer: { title, description, fromUser, conversation, createdAt } } = data
 
 
   return (
@@ -103,7 +104,7 @@ function ShowHelpOffer() {
         }
         {
           conversation.map(message =>
-            <Paper elevation={5} className="requestCard">
+            <Paper elevation={3} className="requestCard">
               <Typography variant="body1">{message.text}</Typography>
               <UserWithTimeAgo createdAt={message.createdAt} user={message.fromUser}/>
             </Paper>
