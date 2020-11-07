@@ -14,7 +14,7 @@ import Landing from './pages/Landing/Landing.page';
 function App() {
   const history = useHistory();
   const themeDefinition = createMuiTheme(themeConfig)
-  if (history.location.pathname === "/" ){
+  if (history.location.pathname === "/" || history.location.pathname === "/%20(" ){ 
     return <Landing/>
   }
 
