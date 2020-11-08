@@ -5,7 +5,10 @@ const AlertProvider = (props) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
   const [alertType, setAlertType] = useState("warning"); 
-  const setAlert = (open, msg, type) => {
+  const setAlert = (type, msg, open=true) => {
+    if (type === "error" || !msg){
+      msg="Something went wrong"
+    }
     setAlertOpen(open);
     setAlertType(type);
     setAlertMsg(msg)

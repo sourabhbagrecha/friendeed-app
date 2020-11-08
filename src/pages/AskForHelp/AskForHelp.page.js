@@ -29,11 +29,11 @@ function AskForHelp() {
   const [skillsRequired, setSkillsRequired] = useState("")
 
   const onError = (error) => {
-    setAlert(true, "Something went wrong!", "error")
+    setAlert("error")
   }
 
   const onCompleted = (data) => {
-    setAlert(true, "Help posted successfully!", "success")
+    setAlert("success", "Help posted successfully!")
     history.push(`/help/${data.addHelpRequest.helpRequest[0].id}`)
   }
 
