@@ -36,12 +36,12 @@ function OfferHelp() {
   const [description, setDescription] = useState("");
 
   const onError = (error) => {
-    setAlert(true, "Something went wrong", "error")
+    setAlert("error")
   }
 
   const onCompleted = (data) => {
     history.push(`/help/${helpRequestId}/help-offer/${data.addHelpOffer.helpOffer[0].id}`)
-    setAlert(true, "Help Offer sent successfully", "success")
+    setAlert("success", "Help Offer sent successfully")
   }
 
   const [addHelpOfferSubmit] = useMutation(ADD_HELP_Offer, { onError, onCompleted })

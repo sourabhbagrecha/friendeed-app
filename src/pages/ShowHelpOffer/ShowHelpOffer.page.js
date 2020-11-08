@@ -60,7 +60,7 @@ function ShowHelpOffer() {
     }
   });
 
-  const onError = (err) => { setAlert(true, "Something went wrong!", "error") }
+  const onError = (err) => { setAlert("error") }
 
   const [addMessage] = useMutation(ADD_MESSAGE, { onError })
 
@@ -92,7 +92,7 @@ function ShowHelpOffer() {
       <div className="title-block">
         <Typography variant="h4" color="primary" className="page-heading">{title}</Typography>
       </div>
-      <UserWithTimeAgo createdAt={createdAt} user={fromUser}/>
+      <UserWithTimeAgo createdAt={createdAt} user={fromUser} />
       <div className="description-block">
         <Typography className="description" style={{ fontSize: "20px" }}><strong>Description:</strong> {description} </Typography>
       </div>
@@ -100,18 +100,18 @@ function ShowHelpOffer() {
         {
           conversation.length > 0 ?
             <Typography variant="h5" color="primary">Conversation: {conversation.length}</Typography> :
-            <Typography variant="h6" color="error" style={{marginBottom: "1rem"}}>No messages, start a conversation now!</Typography>
+            <Typography variant="h6" color="error" style={{ marginBottom: "1rem" }}>No messages, start a conversation now!</Typography>
         }
         {
           conversation.map(message =>
             <Paper elevation={3} className="requestCard">
               <Typography variant="body1">{message.text}</Typography>
-              <UserWithTimeAgo createdAt={message.createdAt} user={message.fromUser}/>
+              <UserWithTimeAgo createdAt={message.createdAt} user={message.fromUser} />
             </Paper>
           )
         }
         <TextField label="message" value={message} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth />
-        <Button style={{marginTop: "1rem"}} variant="contained" color="secondary" onClick={handleSendMessage}>Send</Button>
+        <Button style={{ marginTop: "1rem" }} variant="contained" color="secondary" onClick={handleSendMessage}>Send</Button>
       </div>
     </div>
   )

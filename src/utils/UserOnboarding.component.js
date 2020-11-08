@@ -32,7 +32,7 @@ function UserOnboarding() {
   const { setAlert } = useContext(AlertContext)
 
   const onError = (error) => {
-    setAlert(true, "Something went wrong!", "error")
+    setAlert("error")
   }
 
   const onUserFetchCompleted = (data) => {
